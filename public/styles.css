@@ -1,0 +1,23 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+ul {
+  padding-left: 0;
+}
+
+ul li {
+  list-style: none !important;
+}
+
+.message-date {
+  display: block;
+}
+
+header {
+  margin-left: auto;
+}

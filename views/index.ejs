@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="pico.min.css" />
+  </head>
+  <body class="container">
+    <header>
+      <nav>
+        <a role="button" href="/new">Create new message</a>
+      </nav>
+    </header>
+    <main class="container">
+      <h1>Message board</h1>
+      <ul class="grid">
+        <% messages.map((message) => { %>
+        <li id="message-<%= message.id %>">
+          <article>
+            <h2><%= message.user %></h2>
+            <p>
+              <%= message.text %>
+              <span class="message-date"
+                >Data: <%= message.added.toLocaleString('pt-BR') %>
+              </span>
+            </p>
+
+            <button
+              class="contrast delete-button"
+              onclick="deleteMessage('<%= message.id %>')"
+            >
+              Delete
+            </button>
+          </article>
+        </li>
+        <% }) %>
+      </ul>
+    </main>
+  </body>
+  <script>
+    async function deleteMessage(msgId) {
+      try {
+        const response = await fetch(`/delete/${msgId}`, {
+          method: 'DELETE',
+        });
+
+        if (response.ok) {
+          document.getElementById(`message-${msgId}`).remove();
+        } else {
+          console.error('Failed to delete item');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+  </script>
+</html>

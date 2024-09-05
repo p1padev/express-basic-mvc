@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="pico.min.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Add a new message</h1>
+      <form method="POST" action="/new">
+        <fieldset>
+          <label>Name <input name="name" placeholder="John Doe" /></label>
+          <label
+            >Message <input name="message" placeholder="Hey there!"
+          /></label>
+        </fieldset>
+        <button type="submit">Send message</button>
+      </form>
+    </main>
+  </body>
+</html>
