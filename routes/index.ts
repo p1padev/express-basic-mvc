@@ -1,48 +1,20 @@
 import express from 'express';
-
-type Message = {
-  text: string;
-  user: string;
-  added: Date;
-  id: number;
-};
-
-let id = 1;
-
-let messages: Message[] = [
-  {
-    text: 'Hi there!',
-    user: 'Example',
-    added: new Date(),
-    id: 0,
-  },
-];
+import {
+  messagesCreateItemGet,
+  messagesCreateItemPost,
+  messagesDeleteItem,
+  messagesListGet,
+  validateNewMessage,
+} from '../controllers/messagesController.js';
 
 const indexRouter = express.Router();
 
-indexRouter.get('/', function (req, res) {
-  res.render('index', { title: 'Mini Messageboard', messages });
-});
+indexRouter.get('/', messagesListGet);
 
-indexRouter.get('/new', function (req, res) {
-  res.render('new', { title: 'New message' });
-});
+indexRouter.get('/new', messagesCreateItemGet);
 
-indexRouter.post('/new', function (req, res) {
-  const message: Message = {
-    text: req.body.message,
-    user: req.body.name,
-    added: new Date(),
-    id: id++,
-  };
-  messages.push(message);
-  res.redirect('/');
-});
+indexRouter.post('/new', validateNewMessage, messagesCreateItemPost);
 
-indexRouter.delete('/delete/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  messages = messages.filter((msg) => msg.id !== id);
-  res.status(200).send();
-});
+indexRouter.delete('/delete/:id', messagesDeleteItem);
 
 export default indexRouter;

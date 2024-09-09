@@ -10,11 +10,28 @@
   <body>
     <main class="container">
       <h1>Add a new message</h1>
+      <% if (locals.errors) { %>
+      <ul>
+        <% errors.forEach(error => { %>
+        <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+      <% } %>
       <form method="POST" action="/new">
         <fieldset>
-          <label>Name <input name="name" placeholder="John Doe" /></label>
           <label
-            >Message <input name="message" placeholder="Hey there!"
+            >Name
+            <input
+              name="name"
+              placeholder="John Doe"
+              value="<%= locals.oldInput ? oldInput.name : '' %>"
+          /></label>
+          <label
+            >Message
+            <input
+              name="message"
+              placeholder="Hey there!"
+              value="<%= locals.oldInput ? oldInput.message : '' %>"
           /></label>
         </fieldset>
         <button type="submit">Send message</button>
