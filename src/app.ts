@@ -3,7 +3,7 @@ import path from 'path';
 import indexRouter from '../routes/index.js';
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const assetsPath = path.join(process.cwd(), 'public');
 
 app.set('view engine', 'ejs');

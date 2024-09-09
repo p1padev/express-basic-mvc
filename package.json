@@ -2,9 +2,11 @@
   "name": "express",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/src/app.js",
   "scripts": {
-    "dev": "tsx --env-file=.env --watch src/app.ts"
+    "dev": "tsx --env-file=.env --watch src/app.ts",
+    "build": "pnpm install --frozen-lockfile && npx tsc",
+    "start": "node dist/src/app"
   },
   "keywords": [],
   "author": "",
